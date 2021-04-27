@@ -9,7 +9,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -18,51 +17,37 @@ import java.util.Collections;
 @EqualsAndHashCode
 @NoArgsConstructor
 @Entity
-public class Useri implements Serializable, UserDetails {
+public class Useri implements UserDetails {
 
-    @SequenceGenerator(
-            name = "user_sequence",
-            sequenceName = "user_sequence",
-            allocationSize = 1
-    )
+
     @Id
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "user_sequence"
-    )
-    @Column(nullable = false, updatable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column()
     private String firstName;
     private String lastName;
-    private String password;
     private String email;
-    private String phone;
-    private String address;
+    private String password;
     @Enumerated(EnumType.STRING)
     private AppUserRole appUserRole;
-    @Column(nullable = false, updatable = false)
-    private String userCode;
     private Boolean locked = false;
     private Boolean enabled = false;
 
     public Useri(String firstName,
                  String lastName,
-                 String password,
                  String email,
-                 String phone,
-                 String address,
-                 AppUserRole appUserRole,
-                 String userCode) {
+                 String password,
+                 AppUserRole appUserRole) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
         this.email = email;
-        this.phone = phone;
-        this.address = address;
         this.appUserRole = appUserRole;
-        this.userCode = userCode;
+
     }
+
+    public Useri(Useri userById) {
+    }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -70,12 +55,8 @@ public class Useri implements Serializable, UserDetails {
         return Collections.singletonList(authority);
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
     @Override
-    public String getPassword(){
+    public String getPassword() {
         return password;
     }
 
@@ -84,24 +65,12 @@ public class Useri implements Serializable, UserDetails {
         return email;
     }
 
-    public String getLastName(){
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
         return lastName;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     @Override
@@ -124,11 +93,4 @@ public class Useri implements Serializable, UserDetails {
         return enabled;
     }
 
-    public String getUserCode() {
-        return userCode;
-    }
-
-    public void setUserCode(String userCode) {
-        this.userCode = userCode;
-    }
 }

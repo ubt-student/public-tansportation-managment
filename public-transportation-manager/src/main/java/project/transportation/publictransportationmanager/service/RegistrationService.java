@@ -3,11 +3,11 @@ package project.transportation.publictransportationmanager.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import project.transportation.publictransportationmanager.dto.UserDTO;
 import project.transportation.publictransportationmanager.email.EmailSender;
 import project.transportation.publictransportationmanager.model.AppUserRole;
 import project.transportation.publictransportationmanager.model.Useri;
 import project.transportation.publictransportationmanager.registration.EmailValidator;
-import project.transportation.publictransportationmanager.registration.RegistrationRequest;
 import project.transportation.publictransportationmanager.token.ConfirmationToken;
 import project.transportation.publictransportationmanager.token.ConfirmationTokenService;
 
@@ -21,9 +21,9 @@ public class RegistrationService {
     private final ConfirmationTokenService confirmationTokenService;
     private final EmailSender emailSender;
 
-    public String register(RegistrationRequest request) {
-       boolean isValidEmail = emailValidator.test(request.getEmail());
-        if(!isValidEmail) {
+    public String register(UserDTO request) {
+        boolean isValidEmail = emailValidator.test(request.getEmail());
+        if (!isValidEmail) {
             throw new IllegalStateException("email not valid");
         }
         String token = userService.signUpUser(
@@ -32,16 +32,15 @@ public class RegistrationService {
                         request.getLastName(),
                         request.getEmail(),
                         request.getPassword(),
-                        request.getAddress(),
-                        request.getPhone(),
-                        AppUserRole.USER,
-                        request.getUserCode()
+                        AppUserRole.USER
+
                 )
         );
         String link = "http://localhost:8080/api/v1/registration/confirm?token=" + token;
         emailSender.send(request.getEmail(), buildEmail(request.getFirstName(), link));
         return token;
     }
+
     @Transactional
     public String confirmToken(String token) {
         ConfirmationToken confirmationToken = confirmationTokenService
@@ -54,7 +53,7 @@ public class RegistrationService {
         }
 
         LocalDateTime expiredAt = confirmationToken.getExpiresAt();
-        if (expiredAt.isBefore(LocalDateTime.now())){
+        if (expiredAt.isBefore(LocalDateTime.now())) {
             throw new IllegalStateException("token expired");
         }
 
@@ -64,6 +63,7 @@ public class RegistrationService {
         );
         return "confirmed";
     }
+
     private String buildEmail(String name, String link) {
         return "<div style=\"font-family:Helvetica,Arial,sans-serif;font-size:16px;margin:0;color:#0b0c0c\">\n" +
                 "\n" +
