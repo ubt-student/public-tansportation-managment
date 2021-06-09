@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>Hi</h1>
+<div mat-dialog-content>
+  <p>Me rezervimin e biletes ju do te keni nje vend te ruajtur ne Autobus.</p>
+  <br>
+  <h3>Barileva Tours</h3>
+  <br>
+  <p>Sot: 8:00-10:00</p>
+  <br>
+  <p>Nese ne nderkoh mendoni te mos i bashkangjiteni udhetimit Prishtine-Prizren atehere ju lutem anuloni rezervimin tuaj 2 ore me heret</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button color="primary" (click)="onNoClick()">Jo Faleminderit</button>
+  <button mat-button color="primary" [mat-dialog-close]="data.animal" cdkFocusInitial  style="color: #000; background-color: yellow;">Rezervo Bileten</button>
+</div>

@@ -1,0 +1,118 @@
+<div class="mainPage">
+  <div class="left-side">
+    <h3>KËRKO UDHËTIMET</h3>
+    <div style="display: flex; font-size: 12px; justify-content: space-between;">
+      <p>Ju lutem jepni informatat e nevojshme <br>për të parë orarin ditor të udhëtimit tuaj.</p>
+      <p style="display: flex; position: relative; padding-right: 30px;">5 Qershor, 2021 <mat-icon aria-hidden="false"
+          aria-label="Example home icon" style="font-size: 16px; top: -2px; position: absolute; right: 0px;">
+          calendar_today</mat-icon>
+      </p>
+    </div>
+    <div style="display: flex; justify-content: space-between;">
+      <p>Vendnisja</p>
+      <p>Destinacioni</p>
+    </div>
+    <div style="display: flex; justify-content: space-between;">
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Qyteti</mat-label>
+          <mat-select [formControl]="toppings" [(ngModel)]="vendnisja">
+            <mat-select-trigger>
+              {{toppings.value ? toppings.value : ''}}
+            </mat-select-trigger>
+            <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <button class="icon-button" style="margin-top: 10px;" mat-icon-button color="accent" (click)="swap()">
+        <mat-icon>swap_horiz</mat-icon>
+      </button>
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Qyteti</mat-label>
+          <mat-select [formControl]="toppings1" [(ngModel)]="destinacioni">
+            <mat-select-trigger>
+              {{toppings1.value ? toppings1.value : ''}}
+            </mat-select-trigger>
+            <mat-option *ngFor="let topping of toppingList1" [value]="topping">{{topping}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <p>Rezulatet: </p>
+    <div style="padding: 100px; background-color: #ddd; margin: 30px; border-radius: 10px; position: relative;">
+      <div class="tickets-div">
+        <mat-icon style="position: absolute; left: 0; top: 0;">home</mat-icon>
+        <br>
+        <p style="position: absolute;">Barileva Tours</p>
+        <br>
+        <div style="display: flex; justify-content: space-between; position: relative; left: -23px;">
+          <br>
+          <p>Sot: 08:00 - 10:00</p>
+          <br>
+          <p style="position: relative; right: -23px;"><a href="https://trafikurban-pr.com/orari-dhe-linjat" target="_blank">Orari Javorë</a></p>
+        </div>
+          <div style="position: absolute;">
+            <button (click)="openDialog()" mat-raised-button style="background-color: yellow; color: #000;" class="rezervo-button">Rezervo Bileten</button>
+          </div>
+      </div>
+    </div>
+    <div style="padding: 100px; background-color: #ddd; margin: 30px; border-radius: 10px; position: relative;">
+      <div class="tickets-div">
+        <mat-icon style="position: absolute; left: 0; top: 0;">home</mat-icon>
+        <br>
+        <p style="position: absolute;">Barileva Tours</p>
+        <br>
+        <div style="display: flex; justify-content: space-between; position: relative; left: -23px;">
+          <br>
+          <p>Sot: 08:00 - 10:00</p>
+          <br>
+          <p style="position: relative; right: -23px;"><a href="https://trafikurban-pr.com/orari-dhe-linjat" target="_blank">Orari Javorë</a></p>
+        </div>
+          <div style="position: absolute;">
+            <button (click)="openDialog()" mat-raised-button style="background-color: yellow; color: #000;" class="rezervo-button">Rezervo Bileten</button>
+          </div>
+      </div>
+    </div>
+    <div style="padding: 100px; background-color: #ddd; margin: 30px; border-radius: 10px; position: relative;">
+      <div class="tickets-div">
+        <mat-icon style="position: absolute; left: 0; top: 0;">home</mat-icon>
+        <br>
+        <p style="position: absolute;">Barileva Tours</p>
+        <br>
+        <div style="display: flex; justify-content: space-between; position: relative; left: -23px;">
+          <br>
+          <p>Sot: 08:00 - 10:00</p>
+          <br>
+          <p style="position: relative; right: -23px;"><a href="https://trafikurban-pr.com/orari-dhe-linjat" target="_blank">Orari Javorë</a></p>
+        </div>
+          <div style="position: absolute;">
+            <button (click)="openDialog()" class="rezervo-button" mat-raised-button style="background-color: yellow; color: #000;">Rezervo Bileten</button>
+          </div>
+      </div>
+    </div>
+    <div style="padding: 100px; background-color: #ddd; margin: 30px; border-radius: 10px; position: relative;">
+      <div class="tickets-div">
+        <mat-icon style="position: absolute; left: 0; top: 0;">home</mat-icon>
+        <br>
+        <p style="position: absolute;">Barileva Tours</p>
+        <br>
+        <div style="display: flex; justify-content: space-between; position: relative; left: -23px;">
+          <br>
+          <p>Sot: 08:00 - 10:00</p>
+          <br>
+          <p style="position: relative; right: -23px;"><a href="https://trafikurban-pr.com/orari-dhe-linjat" target="_blank">Orari Javorë</a></p>
+        </div>
+          <div style="position: absolute;">
+            <button mat-raised-button style="background-color: yellow; color: #000;" (click)="openDialog()" class="rezervo-button">Rezervo Bileten</button>
+          </div>
+      </div>
+    </div>
+  </div>
+  <google-map [options]="{ center: center }" class="map">
+    <map-marker *ngFor="let marker of markers" [position]="marker.position" [label]="marker.label"
+      [title]="marker.title" [options]="marker.options">
+    </map-marker>
+  </google-map>
+</div>

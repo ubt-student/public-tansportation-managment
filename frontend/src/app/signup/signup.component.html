@@ -1,0 +1,29 @@
+<div class="signup-page">
+<form class="example-form" [formGroup]="form">
+    <mat-label>Sign Up</mat-label>
+    <br>
+    <mat-form-field class="example-full-width">
+        <mat-label>Name</mat-label>
+        <input matInput name="name" [formControlName]="'name'" placeholder="Example: Jhon">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <mat-label>Last Name</mat-label>
+        <input matInput name="lastName" [formControlName]="'lastName'" placeholder="Example: Cenna">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <mat-label>Email</mat-label>
+        <input matInput name="email" [formControlName]="'email'" placeholder="Example: jhon@gmail.com" type="email">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Password</mat-label>
+      <input matInput name="password" [formControlName]="'password'" type="password">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <mat-label>Confirm Password</mat-label>
+        <input matInput name="password" [formControlName]="'confirmPassword'" type="password">
+      </mat-form-field>
+      <br>
+      <p *ngIf="form.controls.password.value===form.controls.confirmPassword.value&&form.controls.password.touched&&form.controls.password.value">Password Matches</p>
+      <button mat-button (click)="signup()" color="primary" style="float: right;">Register</button>
+  </form>
+</div>

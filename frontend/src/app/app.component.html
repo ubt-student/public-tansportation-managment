@@ -1,0 +1,66 @@
+  <mat-toolbar>
+  <button mat-icon-button class="example-icon" (click)="drawer.toggle()" aria-label="Example icon-button with menu icon">
+    <mat-icon>menu</mat-icon>
+  </button>
+ <span>Public Transportation Manager</span>
+  <span class="example-spacer"></span>
+  <div *ngIf="userService.user" style="position: absolute; right: 25px; font-size: 15px; font-weight: 400;">
+    <div style="background-image: url('https://icon-library.com/images/avatar-icon-images/avatar-icon-images-4.jpg');
+     background-position: center;
+      background-size: cover;
+      height: 40px;
+      width: 40px;
+      cursor: pointer;" [matMenuTriggerFor]="menu"></div>
+    <mat-menu #menu="matMenu">
+      <div style="position: relative; height: 120px; width: 200px;">
+        <div style="background-size: cover;
+         left: 0;
+         right: 0;
+         margin: 0 auto;
+         position: absolute;
+         background-position: center;
+         height: 45px; width: 45px; 
+         background-image: url('https://icon-library.com/images/avatar-icon-images/avatar-icon-images-4.jpg');">
+        </div>
+        <div style="position: absolute; top: 55px; text-align: center; width: 100%;">
+            <p>{{userService.user.email}}</p>
+            <p>{{userService.user.first_name}} {{userService.user.last_name}}</p>
+        </div>
+      </div>
+      <br>
+      <mat-divider></mat-divider>
+      <button mat-menu-item  (click)="myTickets()">
+        <mat-icon style="color: orange;">open_in_new</mat-icon>
+        <span>Rezervimet</span>
+      </button>
+      <button mat-menu-item (click)="logOut()">
+        <mat-icon style="color: red;">login</mat-icon>
+        <span>Shkyqu</span>
+      </button>
+    </mat-menu>
+  </div>
+</mat-toolbar>
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side">
+    <mat-selection-list [multiple]="false">
+      <mat-list-option [routerLink]="['/home']">
+        Home
+      </mat-list-option>
+      <mat-list-option [routerLink]="['/bileta']">
+        My Tickets
+      </mat-list-option>
+      <mat-list-option>
+        About
+      </mat-list-option>
+      <mat-list-option>
+        Home
+      </mat-list-option>
+    </mat-selection-list>
+  </mat-drawer>
+
+  <div class="example-sidenav-content">
+    <router-outlet></router-outlet>
+  </div>
+
+</mat-drawer-container>
+
