@@ -1,0 +1,38 @@
+{
+  "name": "ptm-backend",
+  "version": "1.0.0",
+  "description": "Public Transportation Manager BackEnd",
+  "main": "app.ts",
+  "scripts": {
+    "start": "cross-env NODE_ENV=development nodemon --exec ts-node src/app.ts",
+    "test": "test"
+  },
+  "author": "Ylli Mehmeti",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "config": "^3.3.3",
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^8.6.0"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^3.0.0",
+    "@types/config": "0.0.38",
+    "@types/jsonwebtoken": "^8.5.0",
+    "@types/mocha": "^8.2.0",
+    "@types/node": "^14.14.21",
+    "@typescript-eslint/eslint-plugin": "^4.14.0",
+    "@typescript-eslint/parser": "^4.14.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^7.18.0",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "mocha": "^8.2.1",
+    "nodemon": "^2.0.7",
+    "prettier": "^2.2.1",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.1.3"
+  }
+}
