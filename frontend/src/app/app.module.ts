@@ -25,6 +25,8 @@ import { ConfirmDialogComponent } from './dialogs/confirm-dialog/confirm-dialog.
 import {MatMenuModule} from '@angular/material/menu';
 import {MatListModule} from '@angular/material/list';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker'
 
 @NgModule({
   declarations: [
@@ -55,9 +57,13 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
     MatDividerModule,
     MatDialogModule,
     MatMenuModule,
-    MatListModule
+    MatListModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
   ],
-  providers: [],
+  providers: [
+   { provide: MAT_DATE_LOCALE, useValue: 'en-GB'}
+  ],
   entryComponents:[BiletaConfirmDialogComponent,ConfirmDialogComponent],
   bootstrap: [AppComponent]
 })

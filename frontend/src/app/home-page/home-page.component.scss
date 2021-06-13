@@ -6,21 +6,10 @@
 }
 .left-side {
     padding: 20px;
-    width: 360px;
+    width: 450px;
     background-color: #fff;
     height: 100%;
     float: left;
-}
-
-.map{
-    padding: 0;
-    float: left;
-    height: 100%;
-    width: calc(100% - 400px);
-    .map-container {
-        height: 100% !important;
-        width: 100% !important;
-    }
 }
 .tickets-div{
     width: 250px;
@@ -33,5 +22,5 @@
     bottom: 0;
 }
 .rezervo-button{
-    width: 260px;
+    width: 340px;
 }

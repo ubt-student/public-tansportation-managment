@@ -1,9 +1,17 @@
 <div class="mainPage">
+  <div>
+    <google-map [options]="{ center: center }"
+      class="map-google">
+        <map-marker *ngFor="let marker of markers" [position]="marker.position" [label]="marker.label"
+          [title]="marker.title" [options]="marker.options">
+        </map-marker>
+    </google-map>
+  </div>
   <div class="left-side">
     <h3>KËRKO UDHËTIMET</h3>
     <div style="display: flex; font-size: 12px; justify-content: space-between;">
       <p>Ju lutem jepni informatat e nevojshme <br>për të parë orarin ditor të udhëtimit tuaj.</p>
-      <p style="display: flex; position: relative; padding-right: 30px;">5 Qershor, 2021 <mat-icon aria-hidden="false"
+      <p style="display: flex; position: relative; padding-right: 30px;">{{dataSot | date : 'EEEE, MMMM d, y,'}}<mat-icon aria-hidden="false"
           aria-label="Example home icon" style="font-size: 16px; top: -2px; position: absolute; right: 0px;">
           calendar_today</mat-icon>
       </p>
@@ -45,15 +53,15 @@
       <div class="tickets-div">
         <mat-icon style="position: absolute; left: 0; top: 0;">home</mat-icon>
         <br>
-        <p style="position: absolute;">Barileva Tours</p>
+        <p style="position: absolute;"></p>
         <br>
         <div style="display: flex; justify-content: space-between; position: relative; left: -23px;">
           <br>
-          <p>Sot: 08:00 - 10:00</p>
+          <p>Sot: </p>
           <br>
           <p style="position: relative; right: -23px;"><a href="https://trafikurban-pr.com/orari-dhe-linjat" target="_blank">Orari Javorë</a></p>
         </div>
-          <div style="position: absolute;">
+          <div style="position: absolute; bottom: 0px;">
             <button (click)="openDialog()" mat-raised-button style="background-color: yellow; color: #000;" class="rezervo-button">Rezervo Bileten</button>
           </div>
       </div>
@@ -70,7 +78,7 @@
           <br>
           <p style="position: relative; right: -23px;"><a href="https://trafikurban-pr.com/orari-dhe-linjat" target="_blank">Orari Javorë</a></p>
         </div>
-          <div style="position: absolute;">
+          <div style="position: absolute; bottom: 0px;">
             <button (click)="openDialog()" mat-raised-button style="background-color: yellow; color: #000;" class="rezervo-button">Rezervo Bileten</button>
           </div>
       </div>
@@ -87,7 +95,7 @@
           <br>
           <p style="position: relative; right: -23px;"><a href="https://trafikurban-pr.com/orari-dhe-linjat" target="_blank">Orari Javorë</a></p>
         </div>
-          <div style="position: absolute;">
+          <div style="position: absolute; bottom: 0px;">
             <button (click)="openDialog()" class="rezervo-button" mat-raised-button style="background-color: yellow; color: #000;">Rezervo Bileten</button>
           </div>
       </div>
@@ -104,15 +112,10 @@
           <br>
           <p style="position: relative; right: -23px;"><a href="https://trafikurban-pr.com/orari-dhe-linjat" target="_blank">Orari Javorë</a></p>
         </div>
-          <div style="position: absolute;">
+          <div style="position: absolute; bottom: 0px;">
             <button mat-raised-button style="background-color: yellow; color: #000;" (click)="openDialog()" class="rezervo-button">Rezervo Bileten</button>
           </div>
       </div>
     </div>
   </div>
-  <google-map [options]="{ center: center }" class="map">
-    <map-marker *ngFor="let marker of markers" [position]="marker.position" [label]="marker.label"
-      [title]="marker.title" [options]="marker.options">
-    </map-marker>
-  </google-map>
 </div>

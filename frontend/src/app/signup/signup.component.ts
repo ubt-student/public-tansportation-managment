@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { SignupService } from '../services/signup.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { SignupService } from '../services/signup.service';
 })
 export class SignupComponent implements OnInit {
   form: FormGroup
-  constructor(private signupService: SignupService) { 
+  constructor(private signupService: SignupService,public router: Router) { 
     this.form = new FormGroup({
       name: new FormControl('', [Validators.minLength(2), Validators.required]),
       lastName: new FormControl('', [Validators.minLength(2), Validators.required]),
@@ -24,6 +25,7 @@ export class SignupComponent implements OnInit {
   signup = (): void => {
     this.signupService.signup(this.form.controls.name.value,this.form.controls.lastName.value,this.form.controls.email. value,this.form.controls.password.value,this.form.controls.confirmPassword.value).subscribe((res) =>{
       alert('u insertuan')
+      this.router.navigateByUrl('/login');
       console.log('e ka kalu insertin', res);
     }, (err) => {
       alert('nuk u insertuan')

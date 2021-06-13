@@ -4,6 +4,7 @@ import { GoogleMap, MapMarker } from '@angular/google-maps';
 import { MatDialog } from '@angular/material/dialog';
 import { UserService } from '../services/user.service';
 import { BiletaConfirmDialogComponent } from '../dialogs/bileta-confirm-dialog/bileta-confirm-dialog.component'
+import { AdminService } from '../services/admin.service';
 
 @Component({
   selector: 'app-home-page',
@@ -13,7 +14,7 @@ import { BiletaConfirmDialogComponent } from '../dialogs/bileta-confirm-dialog/b
 export class HomePageComponent implements OnInit {
   @ViewChild(GoogleMap, { static: false })
   map!: GoogleMap;
-  constructor(public userService: UserService, public dialog: MatDialog) { }
+  constructor(public userService: UserService, public dialog: MatDialog, public adminService: AdminService) { }
   markers: any[] = []
   ngOnInit(): void {
     this.center = {
@@ -23,7 +24,21 @@ export class HomePageComponent implements OnInit {
     console.log('center', this.center);
     
     this.addMarker()
+
   }
+
+
+  getSchedules(){
+    this.adminService.getSchedules().subscribe((admin: any) => {
+      this.adminService.admin = admin;
+      
+    },(error) => {
+        console.error(error);
+    })
+  }
+
+  dataSot: number = Date.now();
+  
 
   center: any
 

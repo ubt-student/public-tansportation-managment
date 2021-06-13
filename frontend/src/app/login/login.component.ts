@@ -38,10 +38,9 @@ export class LoginComponent implements OnInit {
   login = (): void => {
     this.loginService.login(this.form.controls.email.value,
       this.form.controls.password.value).subscribe((res) => {
-        alert('ok')
         console.log('res', res);
         this.auth.saveToken(res.token);
-
+        this.router.navigateByUrl('/home');
         this.userService.getUser().subscribe((user: any) => {
           this.userService.user = user;
         },(error) => {

@@ -6,17 +6,6 @@ body { margin: 0; padding: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
     background: #ddd !important;
     color: #555 !important;
 }
-
-.map{
-    padding: 0;
-    float: left;
-    height: calc(100% - 64px);
-    width: calc(100% - 400px);
-    .map-container {
-        height: 100% !important;
-        width: 100% !important;
-    }
-}
 .mat-option-text {
     color:#555;
 }
@@ -32,4 +21,19 @@ body { margin: 0; padding: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
     box-shadow: -2px 5px 7px rgb(0 0 0 / 30%);
     position: absolute;
     right: -25px;
+}
+.map-google{
+    float: right;
+    top: 0;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin: 0 auto;
+    padding: 0;
+    width: calc(100% - 490px);
+    height: calc(100% - 64px);
+    .map-container {
+        width: 100% !important;
+        height: 100% !important;
+    }
 }

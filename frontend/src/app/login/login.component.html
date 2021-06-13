@@ -1,30 +1,40 @@
-<div class="login-bg"></div>
-<div class="login-page">
+<div style="display: flex; background-color: #fff; justify-content: space-between;">
+  <div style="background-color: #fff;">
+    <img
+      src="https://s3-alpha-sig.figma.com/img/7d6d/1e25/df722e5f418e8292a00d98e4c49a02da?Expires=1624233600&Signature=IKOZoKEqZEN-iTLHMS1UjAAzRn2fxK-ugQNSC3Q8QCbKOkWeDbs0M29icz3Dj~ce923rVU3SXgx9C9Zm8lCtbXDVPQLrUOqPWjDhv9-xRgI5gqv-EMjPWGdc4HoaHBcdXBTjU~TuvQpAHWQ72n5fgpz6qYTaH5AgFs70xUENgNE8Wviy1D0UPkOXQ7AQkWHJ171GI0oMpiw3r7t6xfbsvSMDcr3MLvYVSBZzLAExIiLsSlB15lgD9eWvOccFsrbMDrxi6u9d8OONC2tSCbC119TUGAJBuPtKKdMy1UIPASeEX24X9CrqPpwv7lrJMFiZgk3~tCAPtV9dAP6IRgQZvw__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
+      style="width: auto; height: 800px;" alt="">
+  </div>
+  <div class="login-bg"></div>
+  <div class="login-page">
     <div class="login-container">
-    <mat-card class="example-card" style="position: absolute;">
-    <mat-card-header>
-      <mat-card-title>Login</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-        <form class="login-form" [formGroup]="form">
+      <mat-card class="example-card" style="position: absolute;">
+        <mat-card-header>
+          <mat-card-title style="font-family: Poppins;font-size: 30px; color: #26416B;">Login</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <form class="login-form" [formGroup]="form">
             <mat-form-field class="example-full-width">
-              <mat-label>Email</mat-label>
-              <input matInput name="email" [formControlName]="'email'" type="email" placeholder="Ex. jhon@gmail.com" value=""/>
+              <mat-label style="color: #26416B; font: IBM Plex Sans;">Email</mat-label>
+              <input matInput name="email" [formControlName]="'email'" type="email" placeholder="Ex. jhon@gmail.com"
+                value="" />
               <p *ngIf="form.controls.email.touched && form.controls.email.invalid">Email is invalid</p>
             </mat-form-field>
-          
+
             <mat-form-field class="example-full-width">
-              <mat-label>Password</mat-label>
+              <mat-label style="color: #26416B; font: IBM Plex Sans;">Password</mat-label>
               <input [formControlName]="'password'" matInput name="password" type="password" />
-              <p *ngIf="form.controls.password.touched && form.controls.password.invalid">Email is invalid</p>
+              <p *ngIf="form.controls.password.touched && form.controls.password.invalid">Password is invalid</p>
             </mat-form-field>
           </form>
-          
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-button [disabled]="form.invalid" (click)="login()" color="accent" style="float: right;">LOGIN</button>
-      <button mat-button color="accent" (click)="register()">REGISTER</button>
-    </mat-card-actions>
-  </mat-card></div>
-  
+
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button [disabled]="form.invalid" (click)="login()" color="accent"
+            style="color: #26416B; background-color: yellow; float: right; width: 110px;">LOGIN</button>
+          <button style="color: #26416B; background-color: yellow;" mat-button color="accent"
+            (click)="register()">REGISTER</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
 </div>

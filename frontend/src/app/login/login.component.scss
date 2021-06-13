@@ -1,12 +1,13 @@
 .login-container{
-    position: absolute;
+    position: relative;
     height: 300px;
     width: 300px;
     bottom: 0;
     top: 0;
     left: 0;
-    right: 0;
-    margin: auto;
+    right:-0;
+    margin: 0 auto;
+    padding: 160px;
 }
 .login-form{
     margin: 0 auto;
@@ -20,38 +21,43 @@
     height: 100%;
     width: 100%;
     background-size: cover;
-    background-color: rgba(255,255,255, .9);
+    background-color: #fff;
 }
 
-.login-bg{
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    background-size: cover;
-    background-color: rgba(255,255,255, .9);
-}
-.login-bg::before{
-    content: '';
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    top: 0;
-    left: 0;
-    right: 0;
-    background-size: cover;
-    background-image: url('https://thumbs.dreamstime.com/b/bus-stop-bus-city-background-vector-illustration-flat-style-concept-public-transport-bus-stop-bus-city-background-100736869.jpg');
-}
+// .login-bg{
+//     height: 100%;
+//     width: 100%;
+//     position: absolute;
+//     background-size: cover;
+//     background-color: #fff;
+// }
+// .login-bg::before{
+//     content: '';
+//     height: 100%;
+//     width: 100%;
+//     position: absolute;
+//     bottom: 0;
+//     top: 0;
+//     left: 0;
+//     right: 0;
+//     background-size: cover;
+// }
 
 
-.login-bg::after{
-    content: '';
-    height: 100%;
-    width: 100%;
+// .login-bg::after{
+//     content: '';
+//     height: 100%;
+//     width: 100%;
+//     position: absolute;
+//     bottom: 0;
+//     top: 0;
+//     left: 0;
+//     right: 0;
+//     background-color: #fff;
+// }
+.mat-card{
+    width: 230px;
     position: absolute;
-    bottom: 0;
-    top: 0;
-    left: 0;
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.685);
+    height: 200px;
+    box-shadow: none;
 }
