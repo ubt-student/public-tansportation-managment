@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from './services/auth.service';
+import { AuthService } from './auth/auth.service';
+import { User } from './auth/models/user.model';
 import { UserService } from './services/user.service';
 
 @Component({
@@ -9,11 +10,10 @@ import { UserService } from './services/user.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-
-  
+  user: User;
 
   constructor(private router: Router,
-    private auth: AuthService,
+    private authService: AuthService,
     public userService: UserService) {
 
   }
@@ -21,30 +21,34 @@ export class AppComponent implements OnInit {
   public ol: any;
 
   ngOnInit(): void {
-    if (this.auth.isTokenExpired()) {
-      this.router.navigateByUrl('/login');
-      console.log('expired');
-    } else {
-      this.userService.getUser().subscribe((user: any) => {
-        this.userService.user = user;
-      },(error) => {
-          console.error(error);
-      })
-      console.log('going home');
-      
-      // this.router.navigateByUrl('/home');
-      // this.router.navigateByUrl('');
-    }
+    this.authService.user.subscribe(user => {
+      this.user = user;
+    })
+    this.authService.autoLogin();
+    // if (this.auth.isTokenExpired()) {
+    //   this.router.navigateByUrl('/login');
+    //   console.log('expired');
+    // } else {
+    //   this.userService.getUser().subscribe((user: any) => {
+    //     this.userService.user = user;
+    //   },(error) => {
+    //       console.error(error);
+    //   })
+    //   console.log('going home');
+
+    //   // this.router.navigateByUrl('/home');
+    //   // this.router.navigateByUrl('');
+    // }
   }
   showFiller: boolean = false;
 
-  logOut(){
-    this.userService.user = null;
-    this.auth.clearUser();
-    this.router.navigateByUrl('/login');
-  }
   myTickets(){
     this.router.navigateByUrl('/bileta');
+  }
+
+  logout(){
+    this.authService.logout();
+    this.router.navigateByUrl('/auth/login');
   }
 
   typesOfShoes: string[] = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];

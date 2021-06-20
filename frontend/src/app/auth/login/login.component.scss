@@ -1,27 +1,27 @@
 .login-container{
-    position: relative;
-    height: 300px;
-    width: 300px;
-    bottom: 0;
-    top: 0;
-    left: 0;
-    right:-0;
-    margin: 0 auto;
-    padding: 160px;
+  position: relative;
+  height: 300px;
+  width: 300px;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right:-0;
+  margin: 0 auto;
+  padding: 160px;
 }
 .login-form{
-    margin: 0 auto;
-    width: calc(100% - 20px);
-    .mat-form-field{
-        width: 100%;
-    }
+  margin: 0 auto;
+  width: calc(100% - 20px);
+  .mat-form-field{
+      width: 100%;
+  }
 }
 
 .login-page{
-    height: 100%;
-    width: 100%;
-    background-size: cover;
-    background-color: #fff;
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  background-color: #fff;
 }
 
 // .login-bg{
@@ -56,8 +56,8 @@
 //     background-color: #fff;
 // }
 .mat-card{
-    width: 230px;
-    position: absolute;
-    height: 200px;
-    box-shadow: none;
+  width: 230px;
+  position: absolute;
+  height: 200px;
+  box-shadow: none;
 }

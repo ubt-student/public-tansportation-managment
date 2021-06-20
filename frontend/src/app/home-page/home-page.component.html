@@ -1,11 +1,6 @@
 <div class="mainPage">
-  <div>
-    <google-map [options]="{ center: center }"
-      class="map-google">
-        <map-marker *ngFor="let marker of markers" [position]="marker.position" [label]="marker.label"
-          [title]="marker.title" [options]="marker.options">
-        </map-marker>
-    </google-map>
+  <div class="right-side">
+  <app-map></app-map>
   </div>
   <div class="left-side">
     <h3>KËRKO UDHËTIMET</h3>

@@ -6,10 +6,17 @@
 }
 .left-side {
     padding: 20px;
-    width: 450px;
+    width: 35%;
     background-color: #fff;
     height: 100%;
     float: left;
+}
+.right-side {
+  padding: 20px;
+  width: 60%;
+  background-color: #fff;
+  height: 100%;
+  float: right;
 }
 .tickets-div{
     width: 250px;

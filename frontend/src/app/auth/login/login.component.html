@@ -26,14 +26,14 @@
               <p *ngIf="form.controls.password.touched && form.controls.password.invalid">Password is invalid</p>
             </mat-form-field>
           </form>
-
+          <p *ngIf="error">{{ error }}</p>
         </mat-card-content>
         <mat-card-actions>
           <button mat-button [disabled]="form.invalid" (click)="login()" color="accent"
-            style="color: #26416B; background-color: yellow; float: right; width: 110px;">LOGIN</button>
-          <button style="color: #26416B; background-color: yellow;" mat-button color="accent"
-            (click)="register()">REGISTER</button>
+            style="color: #26416B; margin-left: 10%; background-color: yellow; width: 110px;">LOGIN</button>
         </mat-card-actions>
+        <p color="primary" style="margin-top:10%; color:#26416B;">If you're not registered switch to <a style="cursor: pointer;" routerLink="/auth/signup">Signup</a></p>
+
       </mat-card>
     </div>
   </div>
