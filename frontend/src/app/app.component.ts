@@ -2,29 +2,39 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from './auth/auth.service';
 import { User } from './auth/models/user.model';
+import { Weather } from './models/weather.interface';
 import { UserService } from './services/user.service';
+import { WeatherService } from './services/weather.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
   user: User;
-
-  constructor(private router: Router,
+  weather: Weather;
+  url: string;
+  constructor(
+    private weatherService: WeatherService,
+    private router: Router,
     private authService: AuthService,
-    public userService: UserService) {
-
-  }
+    public userService: UserService,
+  ) {}
 
   public ol: any;
 
   ngOnInit(): void {
-    this.authService.user.subscribe(user => {
+    this.authService.user.subscribe((user) => {
       this.user = user;
-    })
+    });
     this.authService.autoLogin();
+    this.weatherService.getCurrentWeather().subscribe((weather) => {
+      this.weather = weather;
+      this.url = this.weatherService.getWeatherIcon(
+        this.weather.weather[0].icon,
+      );
+    });
     // if (this.auth.isTokenExpired()) {
     //   this.router.navigateByUrl('/login');
     //   console.log('expired');
@@ -42,16 +52,22 @@ export class AppComponent implements OnInit {
   }
   showFiller: boolean = false;
 
-  myTickets(){
+  myTickets() {
     this.router.navigateByUrl('/bileta');
   }
 
-  logout(){
+  logout() {
     this.authService.logout();
     this.router.navigateByUrl('/auth/login');
   }
 
-  typesOfShoes: string[] = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
+  typesOfShoes: string[] = [
+    'Boots',
+    'Clogs',
+    'Loafers',
+    'Moccasins',
+    'Sneakers',
+  ];
 
   title = 'public-transportation-manager-app';
 }

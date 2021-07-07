@@ -15,6 +15,7 @@ import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MapComponent } from './home-page/map/map.component';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { MapComponent } from './home-page/map/map.component';
     ConfirmDialogComponent,
     AdminDashboardComponent,
     MapComponent,
+    AboutUsComponent,
   ],
   imports: [
     CommonModule,

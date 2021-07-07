@@ -18,6 +18,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 
 
@@ -43,6 +44,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     GoogleMapsModule,
     MatNativeDateModule,
     MatDatepickerModule,
+    MatGridListModule
   ],
   exports: [
     MatSelectModule,
@@ -62,6 +64,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     GoogleMapsModule,
     MatNativeDateModule,
     MatDatepickerModule,
+    MatGridListModule
   ]
 })
 export class SharedModule { }

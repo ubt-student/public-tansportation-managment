@@ -14,6 +14,7 @@ import { HttpClient } from '@angular/common/http';
 import { Authentication } from './models/authentication.interface';
 import { Router } from '@angular/router';
 import { CreateUser } from './models/create-user.interface';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -28,7 +29,7 @@ export class AuthService {
   login(email: string, password: string) {
     const authentication: Authentication = { email, password };
     return this.http
-      .post<User>('http://localhost:8080/auth/login', authentication)
+      .post<User>(environment.authUrl + 'login', authentication)
       .pipe(
         delay(500),
         timeout(20000),
@@ -39,8 +40,8 @@ export class AuthService {
                 return throwError('timeout');
               }
               return throwError(errorResp.headers.get('WWW-Authenticate'));
-            })
-          )
+            }),
+          ),
         ),
         tap((user) => {
           const expiresIn = 24 * 60 * 60 * 1000;
@@ -49,14 +50,26 @@ export class AuthService {
           this.user.next(user);
           this.autoLogout(expiresIn);
           localStorage.setItem('userData', JSON.stringify(user));
-        })
+        }),
       );
   }
 
-  signup(email: string, firstname: string, lastname: string, password: string, avatar: string) {
-    const createUser: CreateUser = { email, firstname, lastname, password, avatar };
+  signup(
+    email: string,
+    firstname: string,
+    lastname: string,
+    password: string,
+    avatar: string,
+  ) {
+    const createUser: CreateUser = {
+      email,
+      firstname,
+      lastname,
+      password,
+      avatar,
+    };
     return this.http
-      .post<User>('http://localhost:8080/auth/register', createUser)
+      .post<User>(environment.authUrl + 'register', createUser)
       .pipe(
         delay(500),
         timeout(20000),
@@ -66,9 +79,9 @@ export class AuthService {
               if (errorResp.name === 'TimeoutError') {
                 return throwError('timeout');
               }
-              return throwError("email-unique");
-            })
-          )
+              return throwError('email-unique');
+            }),
+          ),
         ),
         tap((user) => {
           const expiresIn = 24 * 60 * 60 * 1000;
@@ -77,7 +90,7 @@ export class AuthService {
           this.user.next(user);
           this.autoLogout(expiresIn);
           localStorage.setItem('userData', JSON.stringify(user));
-        })
+        }),
       );
   }
 
@@ -102,7 +115,7 @@ export class AuthService {
       userData.avatar,
       userData.jwt,
       new Date(userData.expirationDate),
-      userData.admin
+      userData.admin,
     );
 
     if (loadedUser.jwt) {
@@ -125,7 +138,7 @@ export class AuthService {
       map((user) => {
         user.jwt = token;
         this.user.next(user);
-      })
+      }),
     );
   }
 
@@ -135,7 +148,7 @@ export class AuthService {
     this.router.navigate(['/login']);
     localStorage.removeItem('userData');
     if (this.tokenExpirationTimer) {
-        clearTimeout(this.tokenExpirationTimer);
+      clearTimeout(this.tokenExpirationTimer);
     }
     this.tokenExpirationTimer = null;
   }

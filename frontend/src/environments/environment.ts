@@ -4,7 +4,10 @@
 
 export const environment = {
   production: false,
-  mapsApiKey: 'AIzaSyCoFGpLEveqG4OShmtycQG3BaXyTMQqUgI',
+  openWeatherApi: '08b8faab4c2acad9b7c963fab2122722',
+  mapUrl: 'http://localhost:8081/map/',
+  authUrl: 'http://localhost:8080/auth/',
+  bookingUrl: 'http://localhost:8082/booking/',
 };
 
 /*

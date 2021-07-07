@@ -1,22 +1,18 @@
-.mainPage{
-    position: relative;
-    width: 100%;
-    height: calc(100% - 64px);
-    background-color: #ffff;
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto;
 }
 .left-side {
-    padding: 20px;
-    width: 35%;
-    background-color: #fff;
-    height: 100%;
-    float: left;
+  display:block;
+  background-color: #fff;
+  width: 70vh;
+  height: 90vh;
+  margin-left: 15px;
 }
 .right-side {
-  padding: 20px;
-  width: 60%;
+  width: 130vh;
   background-color: #fff;
-  height: 100%;
-  float: right;
+  height: 90vh;
 }
 .tickets-div{
     width: 250px;

@@ -1,24 +1,51 @@
 import { Injectable } from '@angular/core';
 import TileLayer from 'ol/layer/Tile';
-import { XYZ, TileWMS } from 'ol/source';
+import { Source, Vector, VectorTile, XYZ } from 'ol/source';
+import { Vector as VectorLa } from 'ol/layer';
 import Map from 'ol/Map';
 import { Geo } from './models/geo.model';
 import { HttpClient } from '@angular/common/http';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import GeoJSON from 'ol/format/GeoJSON';
-import { Stroke, Style, Text, Fill } from 'ol/style';
+import { Stroke, Style, Text, Fill, Icon, Circle } from 'ol/style';
+import { environment } from 'src/environments/environment';
+import { Route } from '../models/route.model';
+import LineString from 'ol/geom/LineString';
+import { Feature } from 'ol';
+import Point from 'ol/geom/Point';
 
 @Injectable({ providedIn: 'root' })
 export class MapService {
+  busPosition: VectorSource;
+  currentRouteId: number;
+
   constructor(private http: HttpClient) {}
 
   private map: Map;
 
   initializeMap(map: Map) {
     this.map = map;
+    this.addBusPosition();
     this.addGoogleOrtophoto();
     this.addMunicipalityLayer();
+  }
+
+  addBusPosition() {
+    this.busPosition = new Vector({});
+    const layer = new VectorLa({
+      source: this.busPosition,
+      className: 'BusPosition',
+    });
+    layer.setStyle(
+      new Style({
+        image: new Icon({
+          src: '/assets/location.png',
+        }),
+      }),
+    );
+    layer.setZIndex(100);
+    this.map.addLayer(layer);
   }
 
   addGoogleOrtophoto() {
@@ -34,6 +61,49 @@ export class MapService {
       className: 'Google ortophoto',
       visible,
     });
+  }
+
+  findRoute(route: Route) {
+    this.currentRouteId = route.id;
+    this.map.getLayers().forEach((layer) => {
+      if (layer && layer.getClassName() === 'Route') {
+        this.map.removeLayer(layer);
+      }
+    });
+    this.http
+      .get<Geo>(environment.mapUrl + 'route/geometry/' + route.id)
+      .subscribe((geo) => {
+        const routeLayer = this.getVectorLayer(
+          geo,
+          'Route',
+          true,
+          {
+            LineString: new Style({
+              stroke: new Stroke({
+                color: 'yellow',
+                width: 2,
+              }),
+            }),
+          },
+          false,
+        );
+        routeLayer.setZIndex(3);
+        const feature = routeLayer.getSource().getFeatures()[0];
+        (feature.getGeometry() as LineString)
+          .getCoordinates()
+          .forEach((coordinates, i) => {
+            setTimeout(() => {
+              if (this.currentRouteId === route.id) {
+                this.busPosition.clear();
+                const marker = new Feature({
+                  geometry: new Point(coordinates),
+                });
+                this.busPosition.addFeature(marker);
+              }
+            }, i * 3000);
+          });
+        this.map.addLayer(routeLayer);
+      });
   }
 
   addMunicipalityLayer() {
@@ -63,15 +133,38 @@ export class MapService {
             }),
           }),
         },
-        true
+        true,
       );
       municipalityLayer.setZIndex(3);
       this.map.addLayer(municipalityLayer);
     });
   }
 
+  focusMunicipality(municipalityCode: number) {
+    this.getMunicipalityBordersByCode(municipalityCode).subscribe((geo) => {
+      const municipalityLayer = this.getVectorLayer(
+        geo,
+        'Municipality',
+        true,
+        null,
+        true,
+      );
+      const feature = municipalityLayer.getSource().getFeatures()[0];
+      this.map
+        .getView()
+        .setCenter(this.centerOfExtenct(feature.getGeometry().getExtent()));
+      this.map.getView().setZoom(12);
+    });
+  }
+
   getMunicipalityBorders() {
-    return this.http.get<Geo>('http://localhost:8081/map/municipality/geometry');
+    return this.http.get<Geo>(environment.mapUrl + 'municipality/geometry');
+  }
+
+  getMunicipalityBordersByCode(municipalityCode: number) {
+    return this.http.get<Geo>(
+      environment.mapUrl + 'municipality/geometry/' + municipalityCode,
+    );
   }
 
   getVectorLayer(
@@ -79,7 +172,7 @@ export class MapService {
     layerName: string,
     visible: boolean,
     style: any,
-    layerText: boolean
+    layerText: boolean,
   ): VectorLayer {
     const vectorSource = new VectorSource({
       features: new GeoJSON().readFeatures(geo),
@@ -122,5 +215,11 @@ export class MapService {
       }
     }
     return str;
+  }
+
+  centerOfExtenct(extent: any) {
+    const X = extent[0] + (extent[2] - extent[0]) / 2;
+    const Y = extent[1] + (extent[3] - extent[1]) / 2;
+    return [X, Y];
   }
 }
