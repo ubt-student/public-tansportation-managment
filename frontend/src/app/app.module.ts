@@ -16,6 +16,8 @@ import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MapComponent } from './home-page/map/map.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { RouteMapDialogComponent } from './dialogs/route-map-dialog/route-map-dialog.component';
+import { RouteMapComponent } from './dialogs/route-map-dialog/route-map/route-map.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { AboutUsComponent } from './about-us/about-us.component';
     AdminDashboardComponent,
     MapComponent,
     AboutUsComponent,
+    RouteMapDialogComponent,
+    RouteMapComponent,
   ],
   imports: [
     CommonModule,

@@ -71,6 +71,10 @@ export class TicketService {
     );
   }
 
+  deleteTickets(ticket: Ticket) {
+    return this.http.post(environment.bookingUrl + 'ticket/delete', ticket);
+  }
+
   getMunicipalities() {
     return this.municipalities.slice();
   }

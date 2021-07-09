@@ -1,65 +1,122 @@
-<div style="height: 400px; width: 400px; margin: 35px;">
-<form [formGroup]="form">
-  <mat-card class="example-card">
-    <mat-card-header>
-      <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>Regjistro Linjat</mat-card-title>
-      <mat-card-subtitle>Linjat</mat-card-subtitle>
-    </mat-card-header>
-    <mat-form-field class="example-full-width">
-      <mat-label>Company</mat-label>
-      <input matInput name="company" [formControlName]="'company'" placeholder="Example: Barileva Tours">
-  </mat-form-field> 
-  <mat-form-field appearance="fill">
-    <mat-label>Qyteti</mat-label>
-    <mat-select formControlName="vendnisja">
-      <mat-select-trigger>
-        {{form.controls.vendnisja.value}}
-      </mat-select-trigger>
-      <mat-option *ngFor="let qyteti of qytetetList" [value]="qyteti" >{{qyteti}}</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>Qyteti</mat-label>
-    <mat-select formControlName="destinacioni">
-      <mat-select-trigger>
-        {{form.controls.destinacioni.value}}
-      </mat-select-trigger>
-      <mat-option *ngFor="let qyteti of qytetetList" [value]="qyteti">{{qyteti}}</mat-option>
-    </mat-select>
-  </mat-form-field>
+<div style="height: 85vh">
+  <div style="width: 400px; margin: 35px; position: relative; float: left">
+    <form [formGroup]="formLine">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>Regjistro Linje te ri</mat-card-title>
+        </mat-card-header>
+        <mat-form-field appearance="fill">
+          <mat-label>Qyteti prej</mat-label>
+          <mat-select formControlName="departure">
+            <mat-select-trigger>
+              {{
+                getMunicipalityById(formLine.controls.departure.value).nameSq
+              }}
+            </mat-select-trigger>
+            <mat-option
+              *ngFor="let municipality of municipalities"
+              [value]="municipality.id"
+              >{{ municipality.nameSq }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Qyteti tek</mat-label>
+          <mat-select formControlName="arrival">
+            <mat-select-trigger>
+              {{ getMunicipalityById(formLine.controls.arrival.value).nameSq }}
+            </mat-select-trigger>
+            <mat-option
+              *ngFor="let municipality of municipalities"
+              [value]="municipality.id"
+              >{{ municipality.nameSq }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+        <mat-card-actions>
+          <button
+            mat-button
+            (click)="registerLine()"
+            [disabled]="formLine.invalid"
+          >
+            Shto linjen
+          </button>
+        </mat-card-actions>
+        <p *ngIf="lineSuccess">Linja u shtua me sukses!</p>
+      </mat-card>
+    </form>
+  </div>
+  <div
+    style="width: 400px; margin: 35px; margin-left: 70vh; position: relative"
+  >
+    <form [formGroup]="formTravel">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>Regjistro udhetim te ri</mat-card-title>
+        </mat-card-header>
+        <mat-form-field class="example-full-width">
+          <mat-label>Agjencia</mat-label>
+          <input
+            matInput
+            name="agency"
+            [formControlName]="'agency'"
+            placeholder="Example: Barileva Tours"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Linja</mat-label>
+          <mat-select formControlName="line">
+            <mat-option *ngFor="let route of routes" [value]="route.id"
+              >{{ getMunicipalityById(route.municipalityIdFrom).nameSq }} -
+              {{
+                getMunicipalityById(route.municipalityIdTo).nameSq
+              }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="example-form-field">
+          <input
+            matInput
+            type="time"
+            placeholder="koha e nisjes"
+            [formControlName]="'departureTime'"
+          />
+          <mat-label>Koha e nisjes</mat-label>
+        </mat-form-field>
 
-    <mat-form-field appearance="fill" class="example-form-field">
-      <mat-label>Choose a date</mat-label>
-      <input matInput [formControlName]="'nisja'" [matDatepicker]="datepicker" value="nisja">
-      <mat-datepicker-toggle   matSuffix [for]="datepicker"></mat-datepicker-toggle>
-      <mat-datepicker #datepicker>
-        <mat-datepicker-actions>
-          <button mat-button matDatepickerCancel>Cancel</button>
-          <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
-        </mat-datepicker-actions>
-      </mat-datepicker>
-    </mat-form-field>
-    
-    <mat-form-field appearance="fill" class="example-form-field" >
-      <mat-label>Enter a date range</mat-label>
-      <mat-date-range-input  [rangePicker]="rangePicker">
-        <input matStartDate placeholder="Start date" [formControlName]="'arritja'">
-        <input matEndDate placeholder="End date">
-      </mat-date-range-input>
-      <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
-      <mat-date-range-picker #rangePicker>
-        <mat-date-range-picker-actions>
-          <button mat-button matDateRangePickerCancel>Cancel</button>
-          <button mat-raised-button color="primary" matDateRangePickerApply>Apply</button>
-        </mat-date-range-picker-actions>
-      </mat-date-range-picker>
-    </mat-form-field>
+        <mat-form-field appearance="fill" class="example-form-field">
+          <input
+            matInput
+            type="time"
+            placeholder="koha e arritjes"
+            [formControlName]="'arrivalTime'"
+          />
+          <mat-label>Koha e arritjes</mat-label>
+        </mat-form-field>
 
-    <mat-card-actions>
-      <button mat-button (click)="register()">LIKE</button>
-      <button mat-button>SHARE</button>
-    </mat-card-actions>
-  </mat-card>
-</form>
+        <mat-form-field appearance="fill" class="example-form-field">
+          <input
+            matInput
+            type="number"
+            placeholder="Cmimi"
+            [formControlName]="'price'"
+          />
+          <mat-label>Cmimi</mat-label>
+        </mat-form-field>
+
+        <mat-card-actions>
+          <button
+            mat-button
+            (click)="registerTravel()"
+            [disabled]="formTravel.invalid"
+          >
+            Shto udhetimin
+          </button>
+        </mat-card-actions>
+        <p *ngIf="travelSuccess">Udhetimi u shtua me sukses!</p>
+      </mat-card>
+    </form>
+  </div>
 </div>

@@ -23,4 +23,9 @@ public class TicketService {
     public void registerNewTicket(Tickets tickets){
         ticketRepository.save(tickets);
     }
+
+    @Transactional
+    public void deleteTicket(Tickets tickets) {
+        ticketRepository.delete(tickets);
+    }
 }

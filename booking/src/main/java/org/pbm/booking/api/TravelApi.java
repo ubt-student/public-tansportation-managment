@@ -3,10 +3,8 @@ package org.pbm.booking.api;
 import lombok.RequiredArgsConstructor;
 import org.pbm.booking.domain.model.Travel;
 import org.pbm.booking.service.TravelService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,5 +23,11 @@ public class TravelApi {
     @GetMapping("{municipalityIdFrom}/{municipalityIdTo}")
     public List<Travel> getTravelsByMunicipalityId(@PathVariable String municipalityIdFrom, @PathVariable String municipalityIdTo){
         return  travelService.getTravelsByMunicipalityId(Long.valueOf(municipalityIdFrom), Long.valueOf(municipalityIdTo));
+    }
+
+    @PostMapping
+    public ResponseEntity<String> registerTravel(@RequestBody Travel travel) {
+        travelService.registerTravel(travel);
+        return ResponseEntity.ok("{}");
     }
 }

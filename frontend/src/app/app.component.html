@@ -101,7 +101,7 @@
       <mat-list-option [routerLink]="['/home']"> Udhetimet </mat-list-option>
       <mat-list-option [routerLink]="['/bileta']"> Tiketat </mat-list-option>
       <mat-list-option [routerLink]="['/about']"> Rreth nesh </mat-list-option>
-      <mat-list-option [routerLink]="['/admin']" *ngIf="false">
+      <mat-list-option [routerLink]="['/admin']" *ngIf="user?.admin">
         Admin
       </mat-list-option>
     </mat-selection-list>

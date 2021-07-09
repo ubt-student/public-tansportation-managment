@@ -42,7 +42,7 @@ export class HomePageComponent implements OnInit {
   }
 
   onMunicipalityToSelected() {
-    this.mapService.focusMunicipality(this.municipalityTo.code);
+    // this.mapService.focusMunicipality(this.municipalityTo.code);
     this.searchRoutes();
   }
 

@@ -14,21 +14,80 @@ import { Route } from '../models/route.model';
 import LineString from 'ol/geom/LineString';
 import { Feature } from 'ol';
 import Point from 'ol/geom/Point';
+import Draw from 'ol/interaction/Draw';
+import { Subject } from 'rxjs';
+import GeometryType from 'ol/geom/GeometryType';
+import { platformModifierKeyOnly } from 'ol/events/condition';
 
 @Injectable({ providedIn: 'root' })
 export class MapService {
   busPosition: VectorSource;
   currentRouteId: number;
+  private draw: Draw;
+  drawEnd = new Subject<void>();
+  newGeoJson: Geo;
+  private clickEvent: any;
+  private drawingFeature: Feature;
 
   constructor(private http: HttpClient) {}
 
   private map: Map;
 
-  initializeMap(map: Map) {
+  initializeMap(map: Map, draw = false) {
     this.map = map;
     this.addBusPosition();
     this.addGoogleOrtophoto();
     this.addMunicipalityLayer();
+    if (draw) {
+      this.activateDraw();
+    }
+  }
+
+  activateDraw() {
+    this.draw = new Draw({
+      source: new VectorSource(),
+      type: GeometryType.LINE_STRING,
+      condition: platformModifierKeyOnly,
+    });
+
+    this.map.addInteraction(this.draw);
+    this.clickEvent = () => {
+      this.draw.set('click', Math.random());
+    };
+
+    document.addEventListener('click', this.clickEvent, false);
+    this.draw.set('click', Math.random());
+
+    this.draw.on('drawstart', (evt) => {
+      this.drawingFeature = evt.feature;
+    });
+    this.draw.on('drawend', (evt) => {
+      const writer = new GeoJSON();
+      const geojsonStr = writer.writeFeatures([evt.feature]);
+      const geo: Geo = JSON.parse(geojsonStr);
+      this.newGeoJson = geo;
+      const drawedValueZone = this.getVectorLayer(
+        geo,
+        'Route',
+        true,
+        {
+          LineString: new Style({
+            stroke: new Stroke({
+              color: 'yellow',
+              width: 2,
+            }),
+          }),
+        },
+        false,
+      );
+      drawedValueZone.setZIndex(5);
+      this.map.addLayer(drawedValueZone);
+      this.drawEnd.next();
+    });
+  }
+
+  getConstructedRouteGeom() {
+    return this.newGeoJson;
   }
 
   addBusPosition() {
@@ -89,6 +148,12 @@ export class MapService {
         );
         routeLayer.setZIndex(3);
         const feature = routeLayer.getSource().getFeatures()[0];
+        this.map
+          .getView()
+          .setCenter(
+            (feature.getGeometry() as LineString).getFirstCoordinate(),
+          );
+        this.map.getView().setZoom(14);
         (feature.getGeometry() as LineString)
           .getCoordinates()
           .forEach((coordinates, i) => {
