@@ -40,4 +40,16 @@ public class RouteService {
         String geoJson = (String) entityManager.createNativeQuery(query).getSingleResult();
         return geoJson;
     }
+
+    @Transactional
+    public void saveGeom(String id, String geom){
+        geom = geom.replaceAll(",", " ").replaceAll("\\[", "");
+        geom = geom.replaceAll("\\]",",");
+        if ((geom != null) && (geom.length() > 0)) {
+            geom = geom.substring(0, geom.length() - 2);
+        }
+        String query ="INSERT INTO public.route(id, line) VALUES (?, ST_GeomFromText('LINESTRING(" + geom + ")', 3857))";
+        System.out.println(query);
+        entityManager.createNativeQuery(query).setParameter(1, Long.valueOf(id)).executeUpdate();
+    }
 }

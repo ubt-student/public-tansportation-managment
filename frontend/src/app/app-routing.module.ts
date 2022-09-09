@@ -35,6 +35,7 @@ const routes: Routes = [
   {
     path: 'admin',
     canActivate: [AuthGuard, RoleGuard],
+    resolve: [MunicipalitiesResolver],
     component: AdminDashboardComponent,
   },
 ];

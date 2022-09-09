@@ -26,4 +26,9 @@ public class TravelService {
         return travelRepository.getTravelsByRouteMunicipalityIdFromAndMunicipalityIdTo(municipalityIdFrom, municipalityIdTo);
     }
 
+    @Transactional
+    public void registerTravel(Travel travel){
+        travelRepository.save(travel);
+    }
+
 }

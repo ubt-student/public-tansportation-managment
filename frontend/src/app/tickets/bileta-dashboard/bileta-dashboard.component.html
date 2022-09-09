@@ -1,55 +1,50 @@
 <div>
   <p style="margin: 30px">Ju keni gjithsej {{ tickets.length }} rezervime</p>
   <mat-divider></mat-divider>
-  <br />
-  <div style="display: flex">
-    <div class="biletat" *ngFor="let ticket of tickets">
-      <div class="tickets-div">
-        <mat-icon style="position: absolute; left: 0; top: 0">home</mat-icon>
-        <br />
-        <p style="position: absolute">{{ ticket.travel.agency }}</p>
-        <br />
-        <br />
-        <p style="position: absolute">
-          {{
-            getMunicipalityById(ticket.travel.route.municipalityIdFrom).nameSq
-          }}
-          -
-          {{ getMunicipalityById(ticket.travel.route.municipalityIdTo).nameSq }}
-        </p>
-        <br />
-        <br />
-        <div
-          style="
-            display: flex;
-            justify-content: space-between;
-            position: relative;
-            left: -23px;
-          "
-        >
-          <br />
-          <p>
-            {{ ticket.travel.departTime }} - {{ ticket.travel.arrivalTime }}
-          </p>
-          <br />
+  <!-- <link href="https://fonts.googleapis.com/css?family=Cabin|Indie+Flower|Inknut+Antiqua|Lora|Ravi+Prakash"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="style.css"> -->
+  <div class="container">
+    <h1 class="upcomming">upcomming gigs</h1>
+    <div *ngFor="let ticket of tickets">
+      <div class="item">
+        <div class="item-right">
+          <h2 class="num">{{ dataSot | date: 'EE' }}</h2>
+          <p class="day">{{ dataSot | date: 'MM' }}</p>
+          <span class="up-border"></span>
+          <span class="down-border"></span>
+        </div> <!-- end item-right -->
+
+        <div class="item-left">
+          <p class="event">{{ ticket.travel.agency }}</p>
+          <h2 class="title">{{ ticket.travel.agency }}</h2>
+
+          <div class="sce">
+            <div class="icon">
+              <i class="fa fa-table"></i>
+            </div>
+            <p>{{ ticket.travel.departTime }} - {{ ticket.travel.arrivalTime }}</p>
+          </div>
+          <div class="fix"></div>
+          <div class="loc">
+            <div class="icon">
+              <i class="fa fa-map-marker"></i>
+            </div>
+            <p><br />{{ getMunicipalityById(ticket.travel.route.municipalityIdFrom).nameSq }} {{
+              getMunicipalityById(ticket.travel.route.municipalityIdTo).nameSq }}</p>
+          </div>
+          <div class="fix"></div>
           <p style="position: relative; right: -23px">
-            <a
-              href="https://trafikurban-pr.com/orari-dhe-linjat"
-              target="_blank"
-              >Orari Javorë</a
-            >
+            <a href="https://trafikurban-pr.com/orari-dhe-linjat" target="_blank">Orari Javorë</a>
           </p>
-        </div>
-        <div style="position: absolute">
-          <button
-            mat-raised-button
-            style="background-color: yellow; color: #000"
-            class="rezervo-button"
-          >
-            Anulo Rezervimin
-          </button>
-        </div>
-      </div>
+          <button class="tickets" (click)="openDialog(ticket)">Cancel</button>
+        </div> <!-- end item-right -->
+      </div> <!-- end item -->
     </div>
   </div>
+
+
+
+
 </div>

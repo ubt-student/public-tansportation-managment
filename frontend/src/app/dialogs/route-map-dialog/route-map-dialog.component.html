@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>Vizato linjen</h1>
+<div mat-dialog-content>
+  <app-route-map></app-route-map>
+</div>
+<div mat-dialog-actions>
+  <button mat-button color="primary">Anulo vizatimin</button>
+  <button
+    mat-button
+    color="primary"
+    cdkFocusInitial
+    style="color: #000; background-color: yellow"
+    (click)="saveRoute()"
+  >
+    Ruaj Linjen
+  </button>
+</div>

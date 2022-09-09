@@ -27,4 +27,10 @@ public class TicketApi {
         return ResponseEntity.ok("{}");
     }
 
+    @PostMapping("delete")
+    public ResponseEntity<String> deleteTicket(@RequestBody Tickets tickets){
+        ticketService.deleteTicket(tickets);
+        return ResponseEntity.ok("{}");
+    }
+
 }

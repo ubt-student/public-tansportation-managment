@@ -4,6 +4,7 @@
 /dist
 /tmp
 /out-tsc
+<<<<<<< HEAD
 # Only exists if Bazel was run
 /bazel-out
 
@@ -14,6 +15,11 @@ frontend/node_modules
 
 # profiling files
 chrome-profiler-events*.json
+=======
+
+# dependencies
+/frontend/node_modules
+>>>>>>> cf81aaa38b882b80b0c23e4252951c225fb9c54f
 
 # IDEs and editors
 /.idea
@@ -30,7 +36,10 @@ chrome-profiler-events*.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+<<<<<<< HEAD
 .history/*
+=======
+>>>>>>> cf81aaa38b882b80b0c23e4252951c225fb9c54f
 
 # misc
 /.sass-cache
@@ -38,6 +47,7 @@ chrome-profiler-events*.json
 /coverage
 /libpeerconnection.log
 npm-debug.log
+<<<<<<< HEAD
 yarn-error.log
 testem.log
 /typings
@@ -45,3 +55,15 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+=======
+testem.log
+/typings
+
+# e2e
+/e2e/*.js
+/e2e/*.map
+
+# System Files
+.DS_Store
+Thumbs.db
+>>>>>>> cf81aaa38b882b80b0c23e4252951c225fb9c54f

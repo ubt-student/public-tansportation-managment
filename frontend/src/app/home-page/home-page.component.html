@@ -2,22 +2,16 @@
   <div class="grid-container">
     <div class="left-side">
       <h3>KËRKO UDHËTIMET</h3>
-      <div
-        style="display: flex; font-size: 12px; justify-content: space-between"
-      >
+      <div style="display: flex; font-size: 12px; justify-content: space-between">
         <p>
           Ju lutem jepni informatat e nevojshme <br />për të parë orarin ditor
           të udhëtimit tuaj.
         </p>
         <p style="display: flex; position: relative; padding-right: 30px">
           {{ dataSot | date: 'EEEE, MMMM d, y,'
-          }}<mat-icon
-            aria-hidden="false"
-            aria-label="Example home icon"
-            style="font-size: 16px; top: -2px; position: absolute; right: 0px"
-          >
-            calendar_today</mat-icon
-          >
+          }}<mat-icon aria-hidden="false" aria-label="Example home icon"
+            style="font-size: 16px; top: -2px; position: absolute; right: 0px">
+            calendar_today</mat-icon>
         </p>
       </div>
       <div style="display: flex; justify-content: space-between">
@@ -28,39 +22,21 @@
         <div>
           <mat-form-field appearance="fill">
             <mat-label>Qyteti</mat-label>
-            <mat-select
-              [(ngModel)]="municipalityFrom"
-              (selectionChange)="onMunicipalityFromSelected()"
-            >
-              <mat-option
-                *ngFor="let municipality of municipalities"
-                [value]="municipality"
-              >
+            <mat-select [(ngModel)]="municipalityFrom" (selectionChange)="onMunicipalityFromSelected()">
+              <mat-option *ngFor="let municipality of municipalities" [value]="municipality">
                 {{ municipality.nameSq }}
               </mat-option>
             </mat-select>
           </mat-form-field>
         </div>
-        <button
-          class="icon-button"
-          style="margin-top: 10px"
-          mat-icon-button
-          color="accent"
-          (click)="swap()"
-        >
+        <button class="icon-button" style="margin-top: 10px" mat-icon-button color="accent" (click)="swap()">
           <mat-icon>swap_horiz</mat-icon>
         </button>
         <div>
           <mat-form-field appearance="fill">
             <mat-label>Qyteti</mat-label>
-            <mat-select
-              [(ngModel)]="municipalityTo"
-              (selectionChange)="onMunicipalityToSelected()"
-            >
-              <mat-option
-                *ngFor="let municipality of municipalities"
-                [value]="municipality"
-              >
+            <mat-select [(ngModel)]="municipalityTo" (selectionChange)="onMunicipalityToSelected()">
+              <mat-option *ngFor="let municipality of municipalities" [value]="municipality">
                 {{ municipality.nameSq }}
               </mat-option>
             </mat-select>
@@ -71,46 +47,37 @@
       <p>Rezulatet:</p>
       <div style="overflow: auto; height: 58vh; display: block">
         <div *ngFor="let travel of travels">
-          <div
-            style="
+          <div style="
               padding: 100px;
               background-color: #ddd;
-              width: 20vh;
+              width: 29%;
               border-radius: 10px;
               position: relative;
               margin: 10px auto;
-            "
-          >
+            ">
             <div class="tickets-div">
-              <mat-icon style="top: 5px"> directions_bus </mat-icon>
-              {{ travel.agency }} <br /><br />
-              {{ getMunicipalityById(travel.route.municipalityIdFrom).nameSq }}
-              - {{ getMunicipalityById(travel.route.municipalityIdTo).nameSq }}
-              <br />
-              <br />
-              <div
-                style="
+              <div style="display: flex; align-items: center;">
+                <mat-icon style="top: 5px">directions_bus</mat-icon>
+                {{ travel.agency }}
+              </div>
+              <div style="width: 100%; display: inline-block; margin-top: 10px;">{{
+                getMunicipalityById(travel.route.municipalityIdFrom).nameSq }}
+                - {{ getMunicipalityById(travel.route.municipalityIdTo).nameSq }}
+              </div>
+              <div style="
                   display: flex;
                   justify-content: space-between;
-                  position: relative;
-                  left: -23px;
-                  top: -28px;
-                "
-              >
-                <br />
+                ">
+
                 <p>Nisja {{ travel.departTime }}</p>
-                <br />
-                <p style="position: relative; right: -70px">
+
+                <p>
                   Arritja {{ travel.arrivalTime }}
                 </p>
               </div>
               <div style="position: absolute; bottom: 0px">
-                <button
-                  (click)="openDialog(travel)"
-                  mat-raised-button
-                  style="background-color: yellow; color: #000"
-                  class="rezervo-button"
-                >
+                <button (click)="openDialog(travel)" mat-raised-button style="background-color: yellow; color: #000"
+                  class="rezervo-button">
                   Rezervo Bileten
                 </button>
               </div>

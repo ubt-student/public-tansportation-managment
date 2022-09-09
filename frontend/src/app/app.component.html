@@ -1,18 +1,11 @@
 <mat-toolbar class="app-toolbar">
-  <button
-    mat-icon-button
-    class="example-icon"
-    (click)="drawer.toggle()"
-    [disabled]="!user"
-    aria-label="Example icon-button with menu icon"
-  >
+  <button mat-icon-button class="example-icon" (click)="drawer.toggle()" [disabled]="!user"
+    aria-label="Example icon-button with menu icon">
     <mat-icon>menu</mat-icon>
   </button>
   <span>Public Transportation Manager</span>
   <span class="example-spacer"></span>
-  <div
-    *ngIf="weather"
-    style="
+  <div *ngIf="weather" style="
       margin: -1px 0 0 0;
       position: absolute;
       right: 175px;
@@ -23,47 +16,31 @@
       text-align: center;
       vertical-align: middle;
       background-color: aquamarine;
-    "
-  >
+    ">
     {{ weather.main.temp.toFixed(0) }} °C
   </div>
-  <div
-    *ngIf="weather"
-    style="position: absolute; right: 100px; font-size: 15px; font-weight: 400"
-  >
-    <img
-      [src]="url"
-      style="
+  <div *ngIf="weather" style="position: absolute; right: 100px; font-size: 15px; font-weight: 400">
+    <img [src]="url" style="
         background-position: center;
         background-size: cover;
         height: 74px;
         width: 75px;
         cursor: pointer;
         background-color: aquamarine;
-      "
-    />
+      " />
   </div>
-  <div
-    *ngIf="user"
-    style="position: absolute; right: 25px; font-size: 15px; font-weight: 400"
-  >
-    <img
-      [src]="user.avatar"
-      style="
+  <div *ngIf="user" style="position: absolute; right: 25px; font-size: 15px; font-weight: 400">
+    <img [src]="user.avatar" style="
         background-position: center;
         background-size: cover;
         border-radius: 50%;
         height: 40px;
         width: 40px;
         cursor: pointer;
-      "
-      [matMenuTriggerFor]="menu"
-    />
+      " [matMenuTriggerFor]="menu" />
     <mat-menu #menu="matMenu">
       <div style="position: relative; height: 120px; width: 200px">
-        <img
-          [src]="user.avatar"
-          style="
+        <img [src]="user.avatar" style="
             background-size: cover;
             left: 0;
             right: 0;
@@ -73,11 +50,8 @@
             border-radius: 50%;
             height: 45px;
             width: 45px;
-          "
-        />
-        <div
-          style="position: absolute; top: 55px; text-align: center; width: 100%"
-        >
+          " />
+        <div style="position: absolute; top: 55px; text-align: center; width: 100%">
           <p>{{ user.email }}</p>
           <p>{{ user.firstname }} {{ user.lastname }}</p>
         </div>
@@ -101,7 +75,7 @@
       <mat-list-option [routerLink]="['/home']"> Udhetimet </mat-list-option>
       <mat-list-option [routerLink]="['/bileta']"> Tiketat </mat-list-option>
       <mat-list-option [routerLink]="['/about']"> Rreth nesh </mat-list-option>
-      <mat-list-option [routerLink]="['/admin']" *ngIf="false">
+      <mat-list-option [routerLink]="['/admin']" *ngIf="user?.admin">
         Admin
       </mat-list-option>
     </mat-selection-list>

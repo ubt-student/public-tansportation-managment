@@ -1,5 +1,5 @@
-.signup-page{
-  height: 300px;
+.signup-page {
+  height: 58vh;
   width: 300px;
   background-size: cover;
   margin: 0 auto;
@@ -19,7 +19,7 @@
   height: auto;
   width: 50%;
   padding: 10px;
-  min-height:120px;
+  min-height: 120px;
 }
 
 .img-space img {
@@ -43,7 +43,7 @@
   z-index: 99;
   opacity: 0;
 }
-.fileInputProfile[disabled] + .img-space{
+.fileInputProfile[disabled] + .img-space {
   pointer-events: none;
-  cursor: not-allowed!important;
+  cursor: not-allowed !important;
 }

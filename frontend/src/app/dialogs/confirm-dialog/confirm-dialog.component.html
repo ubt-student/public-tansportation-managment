@@ -1,8 +1,18 @@
-<h1 mat-dialog-title>Hi</h1>
+<h1 mat-dialog-title>Konfirmim</h1>
 <div mat-dialog-content>
-    <p>{{data.message}}</p>
+  <p>A jeni te sigurt qe deshironi te anuloni rezervimin e biletes suaj?</p>
 </div>
 <div mat-dialog-actions>
-  <button mat-button color="primary" (click)="onNoClick()">Jo Faleminderit</button>
-  <button mat-button color="primary" [mat-dialog-close]="data.animal" cdkFocusInitial  style="color: #000; background-color: yellow;">Anulo Bileten</button>
+  <button mat-button color="primary" (click)="onNoClick()">
+    Jo Faleminderit
+  </button>
+  <button
+    mat-button
+    color="primary"
+    cdkFocusInitial
+    style="color: #000; background-color: yellow"
+    (click)="deleteTicket()"
+  >
+    Anulo Bileten
+  </button>
 </div>

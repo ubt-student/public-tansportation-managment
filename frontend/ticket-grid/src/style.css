@@ -1,24 +1,3 @@
-.tickets-div {
-  width: 250px;
-  height: 200px;
-  position: absolute;
-  margin: 20px;
-  left: 4px;
-  top: 4px;
-  right: 0;
-  bottom: 0;
-}
-.biletat {
-  padding: 110px;
-  background-color: #ddd;
-  margin: 30px;
-  border-radius: 10px;
-  position: relative;
-  width: 100px;
-}
-.rezervo-button {
-  width: 260px;
-}
 * {
   box-sizing: border-box;
   margin:0;
@@ -54,7 +33,7 @@ div.container {
 }
 .container .item-right, .container .item-left {
   float: left;
-  padding: 20px
+  padding: 20px 
 }
 .container .item-right {
   padding: 79px 50px;
@@ -95,7 +74,7 @@ div.container {
   width: 71%;
   padding: 34px 0px 19px 46px;
   border-left: 3px dotted #999;
-}
+} 
 .container .item-left .title {
   color: #111;
   font-size: 34px;

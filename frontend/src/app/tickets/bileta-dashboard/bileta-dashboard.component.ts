@@ -15,7 +15,7 @@ import { TicketService } from 'src/app/home-page/ticket.service';
 export class BiletaDashboardComponent implements OnInit {
   municipalities: Municipality[] = [];
   user: User;
-  tickets: Ticket[];
+  tickets: Ticket[] = [];
 
   constructor(
     public dialog: MatDialog,
@@ -35,20 +35,24 @@ export class BiletaDashboardComponent implements OnInit {
     });
   }
 
+  dataSot: number = Date.now();
+
   getMunicipalityById(id: number) {
     return { ...this.municipalities.find((m) => m.id === id) };
   }
 
-  openDialog(): void {
+  openDialog(ticket: Ticket): void {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '480px',
-      data: {
-        message:
-          'A jeni te sigurt qe deshironi te anuloni rezervimin e biletes suaj?',
-      },
+      data: ticket,
     });
 
     dialogRef.afterClosed().subscribe((result) => {
+      this.ticketService
+        .getTicketsByUserEmail(this.user.email)
+        .subscribe((tickets) => {
+          this.tickets = tickets;
+        });
       console.log('The dialog was closed', result);
     });
   }

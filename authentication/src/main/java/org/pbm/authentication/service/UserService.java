@@ -32,7 +32,7 @@ public class UserService {
         }
 
         Users user = userMapper.create(request);
-        user.setAdmin(false);
+        user.setAdmin(true);
         user = userRepository.save(user);
 
         String jwtToken = jwtTokenUtil.generateAccessToken(user);
